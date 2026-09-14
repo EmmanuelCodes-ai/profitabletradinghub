@@ -106,13 +106,31 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
   };
 
   // Handle Checkout Submission
-  const handlePaymentSubmit = (e: React.FormEvent) => {
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
-    setTimeout(() => {
+
+    try {
+      // Dispatches the automated email with the "Send Proof of Payment" button
+      await fetch('/api/send-payment-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          traderName,
+          paymentMethod,
+          phoneNumber: `${countryCode} ${phoneNumber}`,
+          amount: '$1,500',
+        }),
+      });
+    } catch (err) {
+      console.warn('Could not dispatch confirmation email:', err);
+    } finally {
       setIsProcessing(false);
       setStep('confirmed');
-    }, 1400);
+    }
   };
 
   const handleProofSubmit = (e: React.FormEvent) => {
