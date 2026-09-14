@@ -1,0 +1,7 @@
+{
+  "name": "Profitable Trading Hub (PTHub)",
+  "description": "The Last Trading Mentorship You'll Ever Need. Stop jumping from strategy to strategy and finally learn a structured framework for consistent profitability.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
