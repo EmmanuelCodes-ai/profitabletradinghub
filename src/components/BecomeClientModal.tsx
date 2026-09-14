@@ -75,7 +75,27 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
     if (e) e.preventDefault();
     setInputError('');
 
-    if (questionIndex === 5) {
+    if (questionIndex === 1) {
+      if (!tradingSituation) {
+        setInputError('Please select your current trading experience level to continue.');
+        return;
+      }
+    } else if (questionIndex === 2) {
+      if (!profitabilityReason) {
+        setInputError('Please select your biggest trading challenge to continue.');
+        return;
+      }
+    } else if (questionIndex === 3) {
+      if (!primaryOutcome) {
+        setInputError('Please select your primary goal for joining to continue.');
+        return;
+      }
+    } else if (questionIndex === 4) {
+      if (!processCommitment) {
+        setInputError('Please select your commitment level to continue.');
+        return;
+      }
+    } else if (questionIndex === 5) {
       if (!traderName.trim()) {
         setInputError('Please enter your full name or trader alias.');
         return;
@@ -256,7 +276,10 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                       return (
                         <div
                           key={idx}
-                          onClick={() => setTradingSituation(opt)}
+                          onClick={() => {
+                            setTradingSituation(opt);
+                            setInputError('');
+                          }}
                           className={`p-4 rounded-2xl border flex items-center gap-3.5 cursor-pointer transition-all ${
                             isSelected
                               ? 'bg-yellow-400/10 border-yellow-400 shadow-md shadow-yellow-400/10'
@@ -315,7 +338,10 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                       return (
                         <div
                           key={idx}
-                          onClick={() => setProfitabilityReason(opt)}
+                          onClick={() => {
+                            setProfitabilityReason(opt);
+                            setInputError('');
+                          }}
                           className={`p-4 rounded-2xl border flex items-center gap-3.5 cursor-pointer transition-all ${
                             isSelected
                               ? 'bg-yellow-400/10 border-yellow-400 shadow-md shadow-yellow-400/10'
@@ -381,7 +407,10 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                       return (
                         <div
                           key={idx}
-                          onClick={() => setPrimaryOutcome(opt)}
+                          onClick={() => {
+                            setPrimaryOutcome(opt);
+                            setInputError('');
+                          }}
                           className={`p-4 rounded-2xl border flex items-center gap-3.5 cursor-pointer transition-all ${
                             isSelected
                               ? 'bg-yellow-400/10 border-yellow-400 shadow-md shadow-yellow-400/10'
@@ -447,7 +476,10 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                       return (
                         <div
                           key={idx}
-                          onClick={() => setProcessCommitment(opt)}
+                          onClick={() => {
+                            setProcessCommitment(opt);
+                            setInputError('');
+                          }}
                           className={`p-4 rounded-2xl border flex items-center gap-3.5 cursor-pointer transition-all ${
                             isSelected
                               ? 'bg-yellow-400/10 border-yellow-400 shadow-md shadow-yellow-400/10'
