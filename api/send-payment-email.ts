@@ -215,8 +215,8 @@ function generateEmailHtml(params: {
 
               <!-- Next Step Notice -->
               <div class="instructions-box">
-                <strong>Action Required to Finalize Your Access:</strong><br>
-                To activate your dashboard, Telegram VIP desk, and Week 1 1-on-1 audit, please click the button below to send your payment transfer receipt or transaction hash directly to our official Telegram desk.
+                <strong>Action Required to Finalize:</strong><br>
+                To secure and retain your spot, please click the button below to send your payment transfer receipt directly to our Official Telegram Desk.
               </div>
 
               <!-- Action Button -->
@@ -270,7 +270,7 @@ export default async function handler(req: any, res: any) {
     }
 
     const paymentMethodLabel = formatPaymentMethod(paymentMethod);
-    const defaultTelegramUrl = process.env.TELEGRAM_URL || 'https://t.me/PTHubDeskSupport';
+    const defaultTelegramUrl = process.env.TELEGRAM_URL || 'https://t.me/Genesis_Tradess';
     const proofUrl = process.env.PROOF_SUBMISSION_URL || defaultTelegramUrl;
     const emailFrom = process.env.EMAIL_FROM || 'Profitable Trading Hub <onboarding@profitabletradinghub.org>';
     const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;

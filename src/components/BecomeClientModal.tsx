@@ -832,10 +832,10 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                     </div>
                     <div className="flex items-center justify-between pt-1">
                       <span className="text-zinc-400">Amount to Transfer:</span>
-                      <span className="text-yellow-400 font-bold text-sm">₦1,950,000</span>
+                      <span className="text-yellow-400 font-bold text-sm">₦2,025,000</span>
                     </div>
                     <p className="text-[11px] text-zinc-500 pt-2 text-center">
-                      Rate: $1 = ₦1,300. Please use your name as the transfer description. Click "I Have Made the Payment" after sending.
+                      Rate: $1 = ₦1,350. Please use your name as the transfer description. Click "I Have Made the Payment" after sending.
                     </p>
                   </div>
                 ) : paymentMethod === 'bank_usd' ? (
@@ -963,11 +963,7 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                   </div>
                   <div className="flex items-start gap-2.5">
                     <div className="w-5 h-5 rounded-full bg-yellow-400/20 text-yellow-400 flex items-center justify-center shrink-0 text-[11px] font-bold mt-0.5">2</div>
-                    <span>Once our team verifies your receipt, you will receive your <strong>Private Telegram Desk & Discord</strong> invite links.</span>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-yellow-400/20 text-yellow-400 flex items-center justify-center shrink-0 text-[11px] font-bold mt-0.5">3</div>
-                    <span>You'll get access to the video vault & be able to book your <strong>Week 1 private trade journal audit</strong>.</span>
+                    <span>Once our team verifies your receipt, you will receive your <strong>Private Whatsapp and telegram</strong> invite.</span>
                   </div>
                 </div>
               </div>
