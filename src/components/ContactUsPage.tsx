@@ -41,11 +41,6 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    countryCode: '+1',
-    phoneNumber: '',
-    experience: 'Intermediate (1-2 years)',
-    marketFocus: 'Forex Majors (EUR/USD, GBP/USD)',
-    capitalTarget: '$100K Prop Firm Evaluation',
     message: ''
   });
 
@@ -294,7 +289,7 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({
                 </div>
                 <div>
                   <div className="text-xs text-zinc-400 font-medium">Telegram Direct Desk Line</div>
-                  <div className="text-sm font-bold text-white mt-0.5">@PTHubDeskSupport</div>
+                  <div className="text-sm font-bold text-white mt-0.5">@Genesis_Tradess</div>
                   <div className="text-[11px] text-zinc-500 mt-1">Live personal chat with desk coordinators</div>
                 </div>
               </div>
@@ -336,7 +331,7 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({
                   </div>
                   <h3 className="text-2xl font-bold text-white">Inquiry Sent to the Trading Desk!</h3>
                   <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
-                    Thank you, <strong className="text-white">{formData.name || 'Trader'}</strong>. Our admissions desk has received your request regarding <strong className="text-yellow-400">{formData.capitalTarget}</strong>. A mentor will review your notes and reply directly to <strong className="text-white">{formData.email}</strong> shortly.
+                    Thank you, <strong className="text-white">{formData.name || 'Trader'}</strong>. Our desk has received your message and will reply to <strong className="text-white">{formData.email}</strong> shortly.
                   </p>
                   <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <button
@@ -356,16 +351,16 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="border-b border-zinc-800 pb-4 mb-2">
-                    <h3 className="text-xl font-bold text-white">Desk Inquiry & Assessment Form</h3>
+                    <h3 className="text-xl font-bold text-white">Send Us a Message</h3>
                     <p className="text-xs text-zinc-400 mt-1">
-                      Tell us where you are currently in your trading journey so we can provide exact guidance.
+                      Fill in the form below and our desk will get back to you shortly.
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-semibold text-zinc-300 block mb-1">
-                        Full Name / Alias <span className="text-yellow-400">*</span>
+                        Full Name <span className="text-yellow-400">*</span>
                       </label>
                       <input
                         type="text"
@@ -379,125 +374,43 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({
 
                     <div>
                       <label className="text-xs font-semibold text-zinc-300 block mb-1">
-                        Direct Email Address <span className="text-yellow-400">*</span>
+                        Email Address <span className="text-yellow-400">*</span>
                       </label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="alex@tradingdesk.com"
+                        placeholder="alex@example.com"
                         className="w-full bg-zinc-950 border border-zinc-700/80 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-yellow-400 transition"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs font-semibold text-zinc-300 block mb-1">
-                        Phone Number <span className="text-zinc-500 font-normal">(Optional)</span>
-                      </label>
-                      <div className="flex gap-2">
-                        <select
-                          value={formData.countryCode}
-                          onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
-                          className="w-24 bg-zinc-950 border border-zinc-700/80 rounded-xl px-2 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-yellow-400 transition"
-                        >
-                          <option value="+1">+1 (US/CA)</option>
-                          <option value="+44">+44 (UK)</option>
-                          <option value="+61">+61 (AU)</option>
-                          <option value="+234">+234 (NG)</option>
-                          <option value="+27">+27 (ZA)</option>
-                          <option value="+91">+91 (IN)</option>
-                          <option value="+971">+971 (AE)</option>
-                          <option value="+254">+254 (KE)</option>
-                        </select>
-                        <input
-                          type="tel"
-                          value={formData.phoneNumber}
-                          onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                          placeholder="234 567 8900"
-                          className="flex-1 bg-zinc-950 border border-zinc-700/80 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-yellow-400 transition"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="text-xs font-semibold text-zinc-300 block mb-1">
-                        Trading Experience Level
-                      </label>
-                      <select
-                        value={formData.experience}
-                        onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-                        className="w-full bg-zinc-950 border border-zinc-700/80 rounded-xl px-3 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-yellow-400 transition cursor-pointer appearance-none"
-                      >
-                        <option value="Beginner (< 1 year)">Beginner (&lt; 1 year of charting)</option>
-                        <option value="Intermediate (1-2 years)">Intermediate (1-2 years, inconsistent)</option>
-                        <option value="Advanced / Strategy Hopping">Advanced / Analysis Paralysis</option>
-                        <option value="Seeking Prop Firm Funding">Seeking Prop Firm Funding ($100k-$400k)</option>
-                        <option value="Active Funded Trader Scaling">Active Funded Trader (Looking to Scale)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs font-semibold text-zinc-300 block mb-1">
-                        Primary Asset Focus
-                      </label>
-                      <select
-                        value={formData.marketFocus}
-                        onChange={(e) => setFormData({ ...formData, marketFocus: e.target.value })}
-                        className="w-full bg-zinc-950 border border-zinc-700/80 rounded-xl px-3 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-yellow-400 transition cursor-pointer appearance-none"
-                      >
-                        <option value="Forex Majors (EUR/USD, GBP/USD)">Forex Majors (EUR/USD, GBP/USD)</option>
-                        <option value="Gold & Commodities (XAU/USD)">Gold & Commodities (XAU/USD)</option>
-                        <option value="Indices (NAS100, US30)">Indices (NAS100, US30)</option>
-                        <option value="Multi-Asset Execution">Multi-Asset Execution</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="text-xs font-semibold text-zinc-300 block mb-1">
-                        Target Capital Goal
-                      </label>
-                      <select
-                        value={formData.capitalTarget}
-                        onChange={(e) => setFormData({ ...formData, capitalTarget: e.target.value })}
-                        className="w-full bg-zinc-950 border border-zinc-700/80 rounded-xl px-3 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-yellow-400 transition cursor-pointer appearance-none"
-                      >
-                        <option value="$50K Prop Firm Evaluation">$50,000 Prop Firm Challenge</option>
-                        <option value="$100K Prop Firm Evaluation">$100,000 Prop Firm Challenge</option>
-                        <option value="$200K+ Institutional Capital">$200,000+ Prop Firm Challenge</option>
-                        <option value="Personal Account Compounding">Personal Account Compounding</option>
-                      </select>
-                    </div>
-                  </div>
-
                   <div>
                     <label className="text-xs font-semibold text-zinc-300 block mb-1">
-                      What is your biggest current trading roadblock? <span className="text-yellow-400">*</span>
+                      Message <span className="text-yellow-400">*</span>
                     </label>
                     <textarea
-                      rows={3}
+                      rows={4}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="e.g. I struggle with taking revenge trades when stopped out, or I'm unsure where institutional liquidity rests on EUR/USD..."
+                      placeholder="How can we help you?"
                       className="w-full bg-zinc-950 border border-zinc-700/80 rounded-xl p-3.5 text-base sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-yellow-400 transition resize-none"
                     />
                   </div>
 
                   <div className="pt-2 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
                     <span className="text-[11px] text-zinc-500 text-center sm:text-left">
-                      Confidential • Response sent via email / telegram
+                      Confidential • Response sent via email
                     </span>
                     <button
                       type="submit"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-yellow-400 text-zinc-950 font-black text-sm hover:bg-yellow-300 active:scale-95 transition-all shadow-lg shadow-yellow-400/25 cursor-pointer min-h-[44px]"
                     >
                       <Send className="w-4 h-4 stroke-[2.5]" />
-                      <span>Submit Inquiry to Desk</span>
+                      <span>Send Message</span>
                     </button>
                   </div>
                 </form>

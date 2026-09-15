@@ -54,7 +54,7 @@ export const FooterSection = ({ onSelectNavTab, onOpenModal }: FooterSectionProp
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-zinc-400">
                 <Mail className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
-                <span>support@tradingacademy.com</span>
+                <span>admissions@profitabletradinghub.com</span>
               </li>
             </ul>
           </div>
