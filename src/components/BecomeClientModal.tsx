@@ -125,6 +125,32 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
     }
   };
 
+  // Handle Proceed to Checkout from Desk Review & Dispatch Email
+  const handleProceedToCheckout = async () => {
+    setIsProcessing(true);
+    try {
+      // Dispatches the reservation email with "Send Proof of Payment" button
+      await fetch('/api/send-payment-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          traderName,
+          paymentMethod,
+          phoneNumber: `${countryCode} ${phoneNumber}`,
+          amount: '$1,500',
+        }),
+      });
+    } catch (err) {
+      console.warn('Could not dispatch reservation email:', err);
+    } finally {
+      setIsProcessing(false);
+      setStep('checkout');
+    }
+  };
+
   // Handle Checkout Submission
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -674,11 +700,21 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
               {/* Actions */}
               <div className="space-y-3 pt-2">
                 <button
-                  onClick={() => setStep('checkout')}
+                  onClick={handleProceedToCheckout}
+                  disabled={isProcessing}
                   className="w-full py-4 rounded-full bg-yellow-400 text-zinc-950 font-black text-sm sm:text-base hover:bg-yellow-300 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-xl shadow-yellow-400/25 cursor-pointer min-h-[48px]"
                 >
-                  <span>Proceed to Checkout — $1,500 Tuition Locked</span>
-                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                  {isProcessing ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
+                      <span>Sending Reservation Email...</span>
+                    </span>
+                  ) : (
+                    <>
+                      <span>Proceed to Checkout — $1,500 Tuition Locked</span>
+                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                    </>
+                  )}
                 </button>
                 
                 <button

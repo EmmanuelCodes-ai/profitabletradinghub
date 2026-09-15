@@ -44,7 +44,7 @@ export const FooterSection = ({ onSelectNavTab, onOpenModal }: FooterSectionProp
               <li><button onClick={() => handleNavClick('Home')} className="text-zinc-400 hover:text-yellow-400 transition-colors">Home</button></li>
               <li><button onClick={() => handleNavClick('About Us')} className="text-zinc-400 hover:text-yellow-400 transition-colors">About Us</button></li>
               <li><button onClick={() => handleNavClick('Contact Us')} className="text-zinc-400 hover:text-yellow-400 transition-colors">Contact Us</button></li>
-              <li><button onClick={() => onOpenModal && onOpenModal('register')} className="text-zinc-400 hover:text-yellow-400 transition-colors">Apply Now</button></li>
+              <li><button onClick={() => onOpenModal && onOpenModal('become_client')} className="text-zinc-400 hover:text-yellow-400 transition-colors">Apply Now</button></li>
             </ul>
           </div>
 
