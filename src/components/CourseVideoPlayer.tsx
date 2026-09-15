@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  Play, 
-  Video, 
-  Sparkles, 
-  ArrowRight, 
-  Link as LinkIcon, 
-  Check, 
+import {
+  Play,
+  Video,
+  Sparkles,
+  ArrowRight,
+  Link as LinkIcon,
+  Check,
   X,
   ExternalLink
 } from 'lucide-react';
@@ -18,8 +18,9 @@ interface CourseVideoPlayerProps {
 
 export const CourseVideoPlayer: React.FC<CourseVideoPlayerProps> = ({ onOpenModal }) => {
   // Allow storing a custom video URL (YouTube, Vimeo, or MP4 direct file)
+  const DEFAULT_VIDEO = '/intro.mp4';
   const [customVideoUrl, setCustomVideoUrl] = useState<string>(() => {
-    return localStorage.getItem('pothub_custom_video_url') || '';
+    return localStorage.getItem('pothub_custom_video_url') || DEFAULT_VIDEO;
   });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isEditingUrl, setIsEditingUrl] = useState<boolean>(false);
@@ -67,24 +68,25 @@ export const CourseVideoPlayer: React.FC<CourseVideoPlayerProps> = ({ onOpenModa
     }
   };
 
-  const isDirectVideoFile = customVideoUrl.match(/\.(mp4|webm|ogg)($|\?)/i);
-  const embedSrc = getEmbedUrl(customVideoUrl);
+  const effectiveVideoUrl = customVideoUrl || DEFAULT_VIDEO;
+  const isDirectVideoFile = effectiveVideoUrl.match(/\.(mp4|webm|ogg)($|\?)/i);
+  const embedSrc = getEmbedUrl(effectiveVideoUrl);
 
   return (
     <div id="course-video" className="w-full space-y-6">
       {/* Main Video Placement Container */}
       <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-yellow-400/40 bg-[#0a0a0a] shadow-[0_20px_60px_rgba(250,204,21,0.08)] group transition-all">
-        
+
         {/* Aspect Ratio Frame (16:9) */}
         <div className="relative w-full aspect-video min-h-[220px] sm:min-h-[420px] lg:min-h-[500px] flex items-center justify-center overflow-hidden bg-zinc-950">
-          
+
           {/* Case 1: Custom Video is playing */}
-          {isPlaying && customVideoUrl ? (
+          {isPlaying && effectiveVideoUrl ? (
             isDirectVideoFile ? (
-              <video 
-                src={customVideoUrl} 
-                controls 
-                autoPlay 
+              <video
+                src={effectiveVideoUrl}
+                controls
+                autoPlay
                 className="w-full h-full object-contain bg-black"
               >
                 Your browser does not support the video tag.
@@ -102,9 +104,9 @@ export const CourseVideoPlayer: React.FC<CourseVideoPlayerProps> = ({ onOpenModa
             /* Case 2: Video Placement Placeholder / Poster Screen */
             <>
               {/* Background Poster Image */}
-              <img 
-                src={defaultPosterBg} 
-                alt="Institutional Trading Desk Preview" 
+              <img
+                src={defaultPosterBg}
+                alt="Institutional Trading Desk Preview"
                 className="absolute inset-0 w-full h-full object-cover object-center opacity-40 brightness-75 transition-all duration-700"
               />
 
@@ -127,14 +129,14 @@ export const CourseVideoPlayer: React.FC<CourseVideoPlayerProps> = ({ onOpenModa
               <div className="absolute top-3 right-3 sm:top-6 sm:right-6 z-20">
                 <button
                   onClick={() => {
-                    setInputUrl(customVideoUrl);
+                    setInputUrl(customVideoUrl === DEFAULT_VIDEO ? '' : customVideoUrl);
                     setIsEditingUrl(!isEditingUrl);
                   }}
                   className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/20 hover:border-yellow-400 text-[10px] sm:text-[11px] font-medium text-zinc-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-lg"
                 >
                   <LinkIcon className="w-3 h-3 text-yellow-400 shrink-0" />
-                  <span className="hidden xs:inline">{customVideoUrl ? 'Change Video' : 'Add Video URL'}</span>
-                  <span className="xs:hidden">{customVideoUrl ? 'Edit' : 'URL'}</span>
+                  <span className="hidden xs:inline">Change Video</span>
+                  <span className="xs:hidden">Edit</span>
                 </button>
               </div>
 
@@ -142,12 +144,7 @@ export const CourseVideoPlayer: React.FC<CourseVideoPlayerProps> = ({ onOpenModa
               <div className="relative z-20 flex flex-col items-center justify-center text-center space-y-3 sm:space-y-4 px-3 sm:px-4 max-w-lg">
                 <button
                   onClick={() => {
-                    if (customVideoUrl) {
-                      setIsPlaying(true);
-                    } else {
-                      setInputUrl('');
-                      setIsEditingUrl(true);
-                    }
+                    setIsPlaying(true);
                   }}
                   aria-label="Play course overview video"
                   className="group relative w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-yellow-400 text-zinc-950 flex items-center justify-center shadow-[0_0_50px_rgba(250,204,21,0.45)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
@@ -158,12 +155,10 @@ export const CourseVideoPlayer: React.FC<CourseVideoPlayerProps> = ({ onOpenModa
 
                 <div className="space-y-1">
                   <div className="text-sm sm:text-xl font-bold text-white tracking-wide">
-                    {customVideoUrl ? 'Click to Watch Video' : 'Custom Video Placement'}
+                    Click to Watch
                   </div>
                   <p className="text-[11px] sm:text-sm text-zinc-300 max-w-xs sm:max-w-md mx-auto">
-                    {customVideoUrl 
-                      ? 'Ready to play your custom strategy video'
-                      : 'Reserved placement for your masterclass video (YouTube, Vimeo, or MP4)'}
+                    Watch the full strategy breakdown — institutional framework explained
                   </p>
                 </div>
               </div>
