@@ -289,18 +289,27 @@ export default async function handler(req: any, res: any) {
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
 
-      const emailResult = await resend.emails.send({
+      // Note: On unverified Resend test domains (onboarding@resend.dev), Resend forbids multiple recipients/BCCs
+      const isTestDomain = emailFrom.includes('onboarding@resend.dev');
+      const shouldBccAdmin = adminEmail && adminEmail.includes('@') && !isTestDomain;
+
+      const emailPayload: any = {
         from: emailFrom,
         to: [email],
-        bcc: adminEmail ? [adminEmail] : undefined,
         subject: `Payment Initiated: Action Required - Send Proof of Payment (${traderName})`,
         html: htmlContent,
-      });
+      };
+
+      if (shouldBccAdmin) {
+        emailPayload.bcc = [adminEmail];
+      }
+
+      const emailResult = await resend.emails.send(emailPayload);
 
       if (emailResult.error) {
         console.error('[Resend Error]', emailResult.error);
         return res.status(500).json({
-          error: 'Failed to send email through provider.',
+          error: emailResult.error.message || 'Failed to send email through provider.',
           details: emailResult.error,
         });
       }
@@ -314,17 +323,11 @@ export default async function handler(req: any, res: any) {
     }
 
     // Development fallback (when RESEND_API_KEY is not yet added in environment variables)
-    console.log('--- [DEV SIMULATION: PAYMENT EMAIL DISPATCHED] ---');
-    console.log(`To: ${email} (${traderName})`);
-    console.log(`Amount: ${amount} | Rail: ${paymentMethodLabel}`);
-    console.log(`Proof Link: ${proofUrl}`);
-    console.log('Set RESEND_API_KEY in your environment variables to dispatch live emails.');
-    console.log('--------------------------------------------------');
-
+    console.warn('[Notice] RESEND_API_KEY is not set in environment variables. Email was not sent over SMTP/API.');
     return res.status(200).json({
       success: true,
       simulated: true,
-      message: 'Payment email processed. (Running in simulated development mode until RESEND_API_KEY is set).',
+      message: 'RESEND_API_KEY environment variable is not configured on Vercel. Set RESEND_API_KEY in Vercel Settings -> Environment Variables and redeploy.',
       recipient: email,
       proofUrl,
     });

@@ -54,6 +54,7 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [proofFileName, setProofFileName] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [emailNotice, setEmailNotice] = useState<{ type: 'warning' | 'error' | 'success'; message: string } | null>(null);
 
   // Reset states when modal opens
   useEffect(() => {
@@ -65,6 +66,7 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
       setIsEvaluating(false);
       setProofFileName('');
       setIsUploading(false);
+      setEmailNotice(null);
     }
   }, [isOpen]);
 
@@ -125,40 +127,15 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
     }
   };
 
-  // Handle Proceed to Checkout from Desk Review & Dispatch Email
-  const handleProceedToCheckout = async () => {
-    setIsProcessing(true);
-    try {
-      // Dispatches the reservation email with "Send Proof of Payment" button
-      await fetch('/api/send-payment-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          traderName,
-          paymentMethod,
-          phoneNumber: `${countryCode} ${phoneNumber}`,
-          amount: '$1,500',
-        }),
-      });
-    } catch (err) {
-      console.warn('Could not dispatch reservation email:', err);
-    } finally {
-      setIsProcessing(false);
-      setStep('checkout');
-    }
-  };
-
-  // Handle Checkout Submission
+  // Handle Checkout Submission (Dispatches email specifically on "I Have Made the Payment")
   const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
+    setEmailNotice(null);
 
     try {
       // Dispatches the automated email with the "Send Proof of Payment" button
-      await fetch('/api/send-payment-email', {
+      const res = await fetch('/api/send-payment-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -171,8 +148,34 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
           amount: '$1,500',
         }),
       });
-    } catch (err) {
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        const errorMsg = data?.error || data?.details?.message || 'Failed to dispatch email';
+        console.error('[Payment Email Error]', errorMsg);
+        setEmailNotice({
+          type: 'error',
+          message: errorMsg,
+        });
+      } else if (data?.simulated) {
+        console.warn('[Payment Email Notice]', data.message);
+        setEmailNotice({
+          type: 'warning',
+          message: data.message,
+        });
+      } else {
+        setEmailNotice({
+          type: 'success',
+          message: `Confirmation email dispatched to ${email}`,
+        });
+      }
+    } catch (err: any) {
       console.warn('Could not dispatch confirmation email:', err);
+      setEmailNotice({
+        type: 'error',
+        message: err?.message || 'Network error reaching payment email API',
+      });
     } finally {
       setIsProcessing(false);
       setStep('confirmed');
@@ -700,21 +703,11 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
               {/* Actions */}
               <div className="space-y-3 pt-2">
                 <button
-                  onClick={handleProceedToCheckout}
-                  disabled={isProcessing}
+                  onClick={() => setStep('checkout')}
                   className="w-full py-4 rounded-full bg-yellow-400 text-zinc-950 font-black text-sm sm:text-base hover:bg-yellow-300 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-xl shadow-yellow-400/25 cursor-pointer min-h-[48px]"
                 >
-                  {isProcessing ? (
-                    <span className="flex items-center gap-2">
-                      <span className="w-4 h-4 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin" />
-                      <span>Sending Reservation Email...</span>
-                    </span>
-                  ) : (
-                    <>
-                      <span>Proceed to Checkout — $1,500 Tuition Locked</span>
-                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-                    </>
-                  )}
+                  <span>Proceed to Checkout — $1,500 Tuition Locked</span>
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                 </button>
                 
                 <button
@@ -946,6 +939,21 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                   Your seat for the <strong className="text-yellow-400">Profitable Trading mentorship cohort</strong> has been reserved. You must now submit your proof of payment to complete your enrollment.
                 </p>
               </div>
+
+              {/* Status Notice if Email had an alert */}
+              {emailNotice && emailNotice.type !== 'success' && (
+                <div className={`p-4 rounded-2xl border text-xs text-left max-w-md mx-auto space-y-1.5 ${
+                  emailNotice.type === 'error'
+                    ? 'bg-red-500/10 border-red-500/30 text-red-300'
+                    : 'bg-amber-500/10 border-amber-500/30 text-amber-300'
+                }`}>
+                  <div className="font-bold flex items-center gap-1.5 text-white">
+                    <AlertCircle className="w-4 h-4 text-yellow-400 shrink-0" />
+                    <span>{emailNotice.type === 'error' ? 'Email Service Notice' : 'Email Setup Notice'}</span>
+                  </div>
+                  <p className="leading-relaxed">{emailNotice.message}</p>
+                </div>
+              )}
 
               {/* Onboarding Checklist Box */}
               <div className="p-4 sm:p-5 rounded-2xl bg-zinc-900 border border-zinc-800 max-w-md mx-auto text-left space-y-3 text-xs">
