@@ -820,48 +820,44 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                   <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3 text-xs">
                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
                       <span className="text-zinc-400">Bank Name:</span>
-                      <span className="text-white font-bold">Guaranty Trust Bank (GTB)</span>
+                      <span className="text-white font-bold">Sterling Bank</span>
                     </div>
                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
                       <span className="text-zinc-400">Account Name:</span>
-                      <span className="text-white font-bold">PTHub Trading</span>
+                      <span className="text-white font-bold">Nmesoma Marvelous</span>
                     </div>
                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
                       <span className="text-zinc-400">Account Number:</span>
-                      <span className="text-white font-bold text-sm tracking-wider">0123456789</span>
+                      <span className="text-white font-bold text-sm tracking-wider">0085178460</span>
                     </div>
                     <div className="flex items-center justify-between pt-1">
                       <span className="text-zinc-400">Amount to Transfer:</span>
-                      <span className="text-yellow-400 font-bold text-sm">₦958,400</span>
+                      <span className="text-yellow-400 font-bold text-sm">₦1,950,000</span>
                     </div>
                     <p className="text-[11px] text-zinc-500 pt-2 text-center">
-                      Please use your name as the transfer description. Click "Complete Enrollment" after sending.
+                      Rate: $1 = ₦1,300. Please use your name as the transfer description. Click "I Have Made the Payment" after sending.
                     </p>
                   </div>
                 ) : paymentMethod === 'bank_usd' ? (
                   <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3 text-xs">
                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
                       <span className="text-zinc-400">Bank Name:</span>
-                      <span className="text-white font-bold">JPMorgan Chase</span>
+                      <span className="text-white font-bold">Sterling Bank</span>
                     </div>
                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
                       <span className="text-zinc-400">Account Name:</span>
-                      <span className="text-white font-bold">PTHub Trading LLC</span>
-                    </div>
-                    <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
-                      <span className="text-zinc-400">Routing Number:</span>
-                      <span className="text-white font-bold text-sm tracking-wider">021000021</span>
+                      <span className="text-white font-bold">NMESOMA IGBOECHEONWU MARVELOUS</span>
                     </div>
                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
                       <span className="text-zinc-400">Account Number:</span>
-                      <span className="text-white font-bold text-sm tracking-wider">9876543210</span>
+                      <span className="text-white font-bold text-sm tracking-wider">0142198011</span>
                     </div>
                     <div className="flex items-center justify-between pt-1">
                       <span className="text-zinc-400">Amount to Transfer:</span>
                       <span className="text-yellow-400 font-bold text-sm">$1,500.00 USD</span>
                     </div>
                     <p className="text-[11px] text-zinc-500 pt-2 text-center">
-                      Please use your name as the wire reference. Click "Complete Enrollment" after initiating wire.
+                      Please use your name as the wire reference. Click "I Have Made the Payment" after initiating wire.
                     </p>
                   </div>
                 ) : (
@@ -874,11 +870,11 @@ export const BecomeClientModal: React.FC<BecomeClientModalProps> = ({ isOpen, on
                       <span className="text-zinc-400">Amount:</span>
                       <span className="text-white font-bold text-sm">1,500.00 USDT</span>
                     </div>
-                    <div className="p-3 bg-zinc-950 rounded-xl font-mono text-[11px] text-zinc-300 break-all border border-zinc-800 text-center">
-                      TXZYAbcDefGhIjKlMnOpQrStUvWxYz1234
+                    <div className="p-3 bg-zinc-950 rounded-xl font-mono text-[11px] text-zinc-300 break-all border border-zinc-800 text-center select-all">
+                      THkLLamF7sz8Ckiia21ctBV1PkncXNr9w1
                     </div>
                     <p className="text-[11px] text-zinc-500 pt-2 text-center">
-                      Send exactly 1,500 USDT on the Tron (TRC20) network. Click "Complete Enrollment" after sending.
+                      Send exactly 1,500 USDT on the Tron (TRC20) network. Click "I Have Made the Payment" after sending.
                     </p>
                   </div>
                 )}
