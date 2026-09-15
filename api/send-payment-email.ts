@@ -272,7 +272,7 @@ export default async function handler(req: any, res: any) {
     const paymentMethodLabel = formatPaymentMethod(paymentMethod);
     const appUrl = process.env.APP_URL || 'https://profitabletradinghub.org';
     const proofUrl = process.env.PROOF_SUBMISSION_URL || `${appUrl}/#proof?email=${encodeURIComponent(email)}`;
-    const emailFrom = process.env.EMAIL_FROM || 'Profitable Trading Hub <onboarding@resend.dev>';
+    const emailFrom = process.env.EMAIL_FROM || 'Profitable Trading Hub <onboarding@profitabletradinghub.org>';
     const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
 
     const htmlContent = generateEmailHtml({
