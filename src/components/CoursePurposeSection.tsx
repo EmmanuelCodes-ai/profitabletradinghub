@@ -331,7 +331,10 @@ export const CoursePurposeSection: React.FC<CoursePurposeSectionProps> = ({ onOp
                   <p>You'll get access to trade ideas and breakdowns showing exactly how opportunities are identified and executed.</p>
                   <p>This allows you to see the strategy applied in real market conditions.</p>
                   <div className="pt-4">
-                    <button className="bg-white text-zinc-950 font-bold px-10 py-4 rounded-xl hover:bg-yellow-400 transition-colors uppercase text-[13px] tracking-widest shadow-lg hover:shadow-yellow-400/20 w-full sm:w-auto">
+                    <button
+                      onClick={() => onSelectNavTab?.('About Us')}
+                      className="bg-white text-zinc-950 font-bold px-10 py-4 rounded-xl hover:bg-yellow-400 transition-colors uppercase text-[13px] tracking-widest shadow-lg hover:shadow-yellow-400/20 w-full sm:w-auto cursor-pointer"
+                    >
                       About Us
                     </button>
                   </div>
