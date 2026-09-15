@@ -293,18 +293,6 @@ export const ContactUsPage: React.FC<ContactUsPageProps> = ({
                   <div className="text-[11px] text-zinc-500 mt-1">Live personal chat with desk coordinators</div>
                 </div>
               </div>
-
-              <div className="p-4 rounded-2xl bg-zinc-900/90 border border-zinc-800/80 flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-yellow-400 shrink-0 mt-0.5">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs text-zinc-400 font-medium">Desk Operating Hours</div>
-                  <div className="text-sm font-bold text-white mt-0.5">Mon – Fri: London & New York Sessions</div>
-                  <div className="text-[11px] text-zinc-500 mt-1">07:00 GMT to 17:30 GMT (Weekend trade journal reviews)</div>
-                </div>
-              </div>
-
             </div>
 
             {/* Reassurance Callout */}
