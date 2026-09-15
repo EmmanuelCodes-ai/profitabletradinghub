@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PotreeHero } from './components/PotreeHero';
 import { CoursePurposeSection } from './components/CoursePurposeSection';
 import { LearningSolutionsSection } from './components/LearningSolutionsSection';
@@ -16,12 +16,39 @@ import { NavModals } from './components/NavModals';
 import { CurrencyCode, ModalType, ActiveNavTab, Transaction } from './types';
 import { INITIAL_BALANCE_USD, CURRENCIES, RECENT_TRANSACTIONS } from './data';
 
+// Map URL hashes to nav tab names
+function getTabFromHash(): ActiveNavTab {
+  const hash = window.location.hash;
+  if (hash === '#about-us') return 'About Us';
+  if (hash === '#contact-us') return 'Contact Us';
+  return 'Home';
+}
+
+function getHashFromTab(tab: ActiveNavTab): string {
+  if (tab === 'About Us') return '#about-us';
+  if (tab === 'Contact Us') return '#contact-us';
+  return '';
+}
+
 export default function App() {
   const [balanceUSD, setBalanceUSD] = useState<number>(INITIAL_BALANCE_USD);
   const [selectedCurrency, setSelectedCurrency] = useState<CurrencyCode>('USD');
   const [activeModal, setActiveModal] = useState<ModalType>(null);
-  const [activeNavTab, setActiveNavTab] = useState<ActiveNavTab>('Home');
+  const [activeNavTab, setActiveNavTab] = useState<ActiveNavTab>(getTabFromHash);
   const [transactions, setTransactions] = useState<Transaction[]>(RECENT_TRANSACTIONS);
+
+  // Keep URL hash in sync whenever the active tab changes
+  useEffect(() => {
+    const hash = getHashFromTab(activeNavTab);
+    window.history.replaceState(null, '', hash || window.location.pathname);
+  }, [activeNavTab]);
+
+  // Handle browser back/forward navigation
+  useEffect(() => {
+    const onHashChange = () => setActiveNavTab(getTabFromHash());
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
 
   // Handle adding funds via Top Up
   const handleAddFunds = (amountUSD: number) => {
