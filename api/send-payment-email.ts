@@ -216,18 +216,18 @@ function generateEmailHtml(params: {
               <!-- Next Step Notice -->
               <div class="instructions-box">
                 <strong>Action Required to Finalize Your Access:</strong><br>
-                To activate your dashboard, Telegram VIP desk, and Week 1 1-on-1 audit, please submit your payment transfer receipt or transaction hash (TxID).
+                To activate your dashboard, Telegram VIP desk, and Week 1 1-on-1 audit, please click the button below to send your payment transfer receipt or transaction hash directly to our official Telegram desk.
               </div>
 
               <!-- Action Button -->
               <div class="cta-wrapper">
                 <a href="${proofUrl}" target="_blank" rel="noopener noreferrer" class="cta-button">
-                  Send Proof of Payment &rarr;
+                  Send Proof on Telegram &rarr;
                 </a>
               </div>
 
               <p class="text" style="font-size: 12px; text-align: center; margin-top: 10px;">
-                Can't click the button? Copy and open this URL in your browser:<br>
+                Can't click the button? Open this Telegram desk link in your browser:<br>
                 <a href="${proofUrl}" style="color: #facc15; word-break: break-all;">${proofUrl}</a>
               </p>
             </div>
@@ -270,8 +270,8 @@ export default async function handler(req: any, res: any) {
     }
 
     const paymentMethodLabel = formatPaymentMethod(paymentMethod);
-    const appUrl = process.env.APP_URL || 'https://profitabletradinghub.org';
-    const proofUrl = process.env.PROOF_SUBMISSION_URL || `${appUrl}/#proof?email=${encodeURIComponent(email)}`;
+    const defaultTelegramUrl = process.env.TELEGRAM_URL || 'https://t.me/PTHubDeskSupport';
+    const proofUrl = process.env.PROOF_SUBMISSION_URL || defaultTelegramUrl;
     const emailFrom = process.env.EMAIL_FROM || 'Profitable Trading Hub <onboarding@profitabletradinghub.org>';
     const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
 
