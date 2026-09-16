@@ -24,7 +24,7 @@ import {
 import { Logo } from './Logo';
 import { ActiveNavTab, ModalType } from '../types';
 
-import clientImg from '../assets/images/female_youtuber_trader_1789334244440.jpg';
+import clientImg from '../assets/images/Creator.jpg';
 
 interface AboutUsPageProps {
   activeNavTab: ActiveNavTab;

@@ -28,10 +28,10 @@ export const FooterSection = ({ onSelectNavTab, onOpenModal }: FooterSectionProp
               Empowering traders with the knowledge, tools, and confidence to achieve lasting success in the financial markets.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-yellow-400 hover:border-yellow-400/50 transition-all">
+              <a href="https://www.instagram.com/genesis_trades?stkn=Z2xqdWo2emowcnM5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-yellow-400 hover:border-yellow-400/50 transition-all">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-yellow-400 hover:border-yellow-400/50 transition-all">
+              <a href="https://youtube.com/@nmesoma_marvelous?si=6pEQDHA2IRN6Ymap" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-yellow-400 hover:border-yellow-400/50 transition-all">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
