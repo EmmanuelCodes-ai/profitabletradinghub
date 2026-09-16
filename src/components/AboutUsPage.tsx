@@ -198,12 +198,12 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Image Side */}
-          <div className="w-full rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl bg-zinc-900 relative">
+          <div className="w-full max-w-sm mx-auto lg:mx-0 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl bg-zinc-900 relative">
             <img 
               src={clientImg}
               alt="PTHub professional trader at their desk"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover min-h-[400px] lg:min-h-[500px]"
+              className="w-full h-full object-cover min-h-[250px] lg:min-h-[250px]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent pointer-events-none" />
             
